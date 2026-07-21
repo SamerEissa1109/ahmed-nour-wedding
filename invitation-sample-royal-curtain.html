@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حفل زفاف أحمد ونور</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-dark:#241110;
+    --bg-darker:#180b0a;
+    --gold:#c9a24a;
+    --gold-soft:#d9b96a;
+    --cream:#f1e7d6;
+    --cream-2:#e8dbc4;
+    --text-light:#f3ead9;
+    --text-dim:#c9b8a6;
+    --ink:#241110;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Cairo',sans-serif;
+    background:var(--bg-dark);
+    color:var(--text-light);
+    overflow-x:hidden;
+  }
+  .display{font-family:'Aref Ruqaa',serif;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 28px;
+  }
+  .lang-toggle{
+    display:flex; gap:6px; background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15); border-radius:20px; padding:4px;
+  }
+  .lang-toggle button{
+    background:transparent; border:none; color:var(--text-dim);
+    font-family:'Cairo'; font-size:12px; padding:4px 10px; border-radius:16px; cursor:pointer;
+  }
+  .lang-toggle button.active{background:var(--gold); color:var(--ink); font-weight:700;}
+  .event-title-tag{font-size:13px; color:var(--text-dim); letter-spacing:.5px;}
+
+  /* ---------- Hero / Curtain ---------- */
+  .hero{
+    position:relative; min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:120px 20px 60px;
+    background:
+      radial-gradient(ellipse at top, rgba(201,162,74,.08), transparent 60%),
+      linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 55%, var(--bg-dark) 100%);
+    overflow:hidden;
+  }
+  .curtain-fold{
+    position:absolute; top:0; bottom:0; width:22%;
+    background:repeating-linear-gradient(90deg,
+      rgba(0,0,0,.35) 0px, rgba(0,0,0,.1) 18px, rgba(0,0,0,.35) 36px);
+    opacity:.55;
+  }
+  .curtain-fold.left{left:0;}
+  .curtain-fold.right{right:0;}
+  .lantern{
+    position:absolute; top:0; width:2px; height:90px;
+    background:linear-gradient(180deg, transparent, var(--gold-soft));
+  }
+  .lantern::after{
+    content:''; position:absolute; bottom:-10px; left:50%; transform:translateX(-50%);
+    width:14px; height:14px; border-radius:50%; background:var(--gold-soft);
+    box-shadow:0 0 18px 6px rgba(217,185,106,.55);
+  }
+  .lantern.l{left:24%;}
+  .lantern.r{right:24%;}
+
+  .invite-card{
+    position:relative; z-index:2; max-width:480px; width:100%;
+    background:rgba(24,11,10,.72); backdrop-filter:blur(4px);
+    border:1px solid rgba(201,162,74,.4); border-radius:6px;
+    padding:44px 34px; box-shadow:0 20px 60px rgba(0,0,0,.5);
+    animation:riseIn 1.1s ease-out both;
+  }
+  @keyframes riseIn{from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:translateY(0);}}
+  .eyebrow{color:var(--gold); font-size:13px; letter-spacing:1px; margin-bottom:14px;}
+  .names{font-family:'Aref Ruqaa'; font-size:44px; line-height:1.3; color:var(--text-light);}
+  .divider-dot{width:6px; height:6px; border-radius:50%; background:var(--gold); margin:16px auto;}
+  .invite-line{font-size:14px; color:var(--text-dim); margin-bottom:22px; line-height:1.8;}
+  .date-pill{
+    display:inline-block; background:var(--gold); color:var(--ink);
+    font-weight:700; font-size:14px; padding:9px 26px; border-radius:24px;
+  }
+  .scroll-hint{
+    position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
+    color:var(--text-dim); font-size:12px; text-align:center; z-index:2;
+  }
+  .scroll-hint svg{display:block; margin:6px auto 0; animation:bounce 1.8s infinite;}
+  @keyframes bounce{0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);}}
+
+  /* ---------- generic section shell ---------- */
+  section{padding:80px 24px;}
+  .section-inner{max-width:960px; margin:0 auto;}
+  .section-eyebrow{color:var(--gold); font-size:12px; letter-spacing:1px; margin-bottom:10px;}
+  .section-title{font-family:'Aref Ruqaa'; font-size:32px; margin-bottom:36px;}
+  .rule{height:1px; background:linear-gradient(90deg, rgba(201,162,74,.5), transparent); margin-bottom:36px;}
+
+  /* ---------- Families ---------- */
+  .families-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(201,162,74,.25); border:1px solid rgba(201,162,74,.25);}
+  .family-card{background:var(--bg-dark); padding:40px 28px; text-align:center;}
+  .family-role{color:var(--gold); font-size:12px; margin-bottom:10px;}
+  .family-name{font-family:'Aref Ruqaa'; font-size:26px;}
+
+  /* ---------- Countdown + RSVP (light section) ---------- */
+  .light-section{background:var(--cream); color:var(--ink);}
+  .light-section .section-eyebrow{color:#8a6a2a;}
+  .light-section .rule{background:linear-gradient(90deg, rgba(138,106,42,.5), transparent);}
+  .countdown-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:56px;}
+  .cd-box{background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:6px; padding:24px 8px; text-align:center;}
+  .cd-num{font-family:'Aref Ruqaa'; font-size:38px; color:var(--ink);}
+  .cd-label{font-size:12px; color:#7a6b57; margin-top:6px;}
+
+  .rsvp-card{max-width:560px; margin:0 auto;}
+  .rsvp-sub{font-size:13px; color:#6b5c48; margin-bottom:28px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-size:13px; margin-bottom:6px; color:#5a4c3a;}
+  .field input, .field textarea, .field select{
+    width:100%; padding:12px 14px; border:1px solid rgba(0,0,0,.12); border-radius:6px;
+    font-family:'Cairo'; font-size:14px; background:#fff; color:var(--ink);
+  }
+  .phone-row{display:flex; gap:8px;}
+  .phone-row select{flex:0 0 90px;}
+  .toggle-row{display:flex; gap:10px;}
+  .toggle-btn{
+    flex:1; padding:12px; border-radius:6px; border:1px solid rgba(0,0,0,.15);
+    background:#fff; font-family:'Cairo'; font-weight:600; font-size:14px; cursor:pointer; color:#5a4c3a;
+  }
+  .toggle-btn.selected{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .submit-btn{
+    width:100%; padding:14px; border-radius:6px; border:none;
+    background:var(--ink); color:#fff; font-family:'Cairo'; font-weight:700; font-size:15px; cursor:pointer;
+    margin-top:8px;
+  }
+  .submit-btn:hover{background:#3a1f1c;}
+  .rsvp-note{font-size:12px; color:#8a7a63; margin-top:14px; text-align:center;}
+
+  /* ---------- Story ---------- */
+  .timeline-item{display:flex; justify-content:space-between; align-items:flex-start; padding:26px 0; border-bottom:1px solid rgba(201,162,74,.15);}
+  .timeline-item:last-child{border-bottom:none;}
+  .ti-text .ti-title{font-weight:700; font-size:17px; margin-bottom:6px;}
+  .ti-text .ti-desc{font-size:13px; color:var(--text-dim); max-width:420px; line-height:1.7;}
+  .ti-num{font-family:'Aref Ruqaa'; font-size:30px; color:var(--gold-soft);}
+
+  /* ---------- Details / Location ---------- */
+  .details-card{
+    background:rgba(255,255,255,.03); border:1px solid rgba(201,162,74,.25); border-radius:8px;
+    padding:32px; display:grid; grid-template-columns:1fr 1fr; gap:20px;
+  }
+  .detail-block .dl-label{font-size:12px; color:var(--gold); margin-bottom:6px;}
+  .detail-block .dl-value{font-size:15px; color:var(--text-light);}
+  .cal-btn, .dir-btn{
+    display:inline-flex; align-items:center; gap:8px; margin-top:24px;
+    background:var(--gold); color:var(--ink); border:none; border-radius:24px;
+    padding:11px 22px; font-family:'Cairo'; font-weight:700; font-size:13px; cursor:pointer; text-decoration:none;
+  }
+  .location-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+    border:1px solid rgba(201,162,74,.25); border-radius:8px; padding:24px 28px;}
+  .loc-left{display:flex; align-items:center; gap:12px; font-size:15px;}
+
+  /* ---------- Program ---------- */
+  .program-row{display:flex; justify-content:space-between; padding:18px 0; border-bottom:1px solid rgba(201,162,74,.12); font-size:15px;}
+  .program-row:last-child{border-bottom:none;}
+  .program-time{color:var(--gold-soft); font-weight:700; direction:ltr;}
+
+  /* ---------- FAQ ---------- */
+  .faq-item{border-bottom:1px solid rgba(201,162,74,.15);}
+  .faq-q{
+    width:100%; background:transparent; border:none; color:var(--text-light);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px 4px; font-family:'Cairo'; font-size:15px; cursor:pointer; text-align:right;
+  }
+  .faq-q .chev{transition:transform .25s; color:var(--gold);}
+  .faq-item.open .faq-q .chev{transform:rotate(180deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease; font-size:13px; color:var(--text-dim); line-height:1.8;}
+  .faq-a p{padding:0 4px 18px;}
+
+  /* ---------- Footer ---------- */
+  footer{text-align:center; padding:60px 24px; background:var(--bg-darker);}
+  footer .f-line{font-family:'Aref Ruqaa'; font-size:22px; margin-bottom:10px;}
+  footer .f-sub{font-size:13px; color:var(--text-dim);}
+
+  @media (max-width:640px){
+    .families-grid{grid-template-columns:1fr;}
+    .countdown-grid{grid-template-columns:repeat(4,1fr); gap:8px;}
+    .cd-num{font-size:26px;}
+    .details-card{grid-template-columns:1fr;}
+    .names{font-size:34px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="lang-toggle" id="langToggle">
+    <button class="active" data-lang="ar">ع</button>
+    <button data-lang="en">EN</button>
+  </div>
+  <div class="event-title-tag" data-ar="حفل زفاف أحمد ونور" data-en="Ahmed & Nour's Wedding">حفل زفاف أحمد ونور</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="curtain-fold left"></div>
+  <div class="curtain-fold right"></div>
+  <div class="lantern l"></div>
+  <div class="lantern r"></div>
+
+  <div class="invite-card">
+    <div class="eyebrow" data-ar="بمشيئة الله وحسن توفيقه" data-en="God willing, with His blessing">بمشيئة الله وحسن توفيقه</div>
+    <div class="names">أحمد و نور</div>
+    <div class="divider-dot"></div>
+    <div class="invite-line" data-ar="يتشرفان بدعوتكم لحضور حفل زفافهما"
+         data-en="Warmly invite you to celebrate their wedding">
+      يتشرفان بدعوتكم لحضور حفل زفافهما
+    </div>
+    <div class="date-pill" data-ar="15 يناير 2027" data-en="Jan 15, 2027">15 يناير 2027</div>
+  </div>
+
+  <div class="scroll-hint">
+    <span data-ar="اسحب للتفاصيل" data-en="Scroll for details">اسحب للتفاصيل</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+</section>
+
+<!-- FAMILIES -->
+<section>
+  <div class="section-inner">
+    <div class="section-eyebrow" data-ar="بكل الحب" data-en="With all our love">بكل الحب</div>
+    <div class="section-title" data-ar="عائلتا العروسين" data-en="Our Families">عائلتا العروسين</div>
+    <div class="rule"></div>
+    <div class="families-grid">
+      <div class="family-card">
+        <div class="family-role" data-ar="العريس" data-en="Groom">العريس</div>
+        <div class="family-name">عائلة آل سعيد</div>
+      </div>
+      <div class="family-card">
+        <div class="family-role" data-ar="العروس" data-en="Bride">العروس</div>
+        <div class="family-name">عائلة آل حسن</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTDOWN + RSVP -->
+<section class="light-section" id="rsvpSection">
+  <div class="section-inner">
+    <div class="section-eyebrow" data-ar="عد تنازلي" data-en="Countdown">عد تنازلي</div>
+    <div class="section-title" data-ar="نعد اللحظات حتى نلقاكم" data-en="Counting down until we meet">نعد اللحظات حتى نلقاكم</div>
+    <div class="rule"></div>
+    <div class="countdown-grid" id="countdown">
+      <div class="cd-box"><div class="cd-num" id="cd-days">--</div><div class="cd-label" data-ar="يوم" data-en="Days">يوم</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-hours">--</div><div class="cd-label" data-ar="ساعة" data-en="Hours">ساعة</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-mins">--</div><div class="cd-label" data-ar="دقيقة" data-en="Minutes">دقيقة</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-secs">--</div><div class="cd-label" data-ar="ثانية" data-en="Seconds">ثانية</div></div>
+    </div>
+
+    <div class="rsvp-card">
+      <div class="section-title" style="font-size:26px;" data-ar="تأكيد الحضور" data-en="RSVP">تأكيد الحضور</div>
+      <div class="rsvp-sub" data-ar="نرجو تأكيد حضوركم قبل أسبوع من الحفل" data-en="Kindly confirm one week before the event">نرجو تأكيد حضوركم قبل أسبوع من الحفل</div>
+
+      <form id="rsvpForm">
+        <div class="field">
+          <label data-ar="الاسم" data-en="Name">الاسم</label>
+          <input type="text" id="rsvp-name" placeholder="اسم الكريم" data-ph-ar="اسم الكريم" data-ph-en="Your full name" required>
+        </div>
+        <div class="field">
+          <label data-ar="رقم الجوال" data-en="Phone number">رقم الجوال</label>
+          <div class="phone-row">
+            <select id="rsvp-code">
+              <option value="+20">🇪🇬 +20</option>
+              <option value="+966">🇸🇦 +966</option>
+              <option value="+971">🇦🇪 +971</option>
+            </select>
+            <input type="tel" id="rsvp-phone" placeholder="5x xxx xxxx">
+          </div>
+        </div>
+        <div class="field">
+          <label data-ar="الحضور" data-en="Attendance">الحضور</label>
+          <div class="toggle-row">
+            <button type="button" class="toggle-btn selected" data-val="yes" data-ar="سأحضر" data-en="I'll attend">سأحضر</button>
+            <button type="button" class="toggle-btn" data-val="no" data-ar="أعتذر" data-en="Can't make it">أعتذر</button>
+          </div>
+        </div>
+        <div class="field">
+          <label data-ar="عدد الأشخاص" data-en="Number of guests">عدد الأشخاص</label>
+          <input type="number" id="rsvp-guests" value="1" min="1">
+        </div>
+        <div class="field">
+          <label data-ar="كلمة لنا" data-en="Message">كلمة لنا</label>
+          <textarea id="rsvp-msg" rows="3" placeholder="شاركونا أمنياتكم وكلماتكم الطيبة..." data-ph-ar="شاركونا أمنياتكم وكلماتكم الطيبة..." data-ph-en="Share your wishes..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn" data-ar="إرسال التأكيد" data-en="Send RSVP">إرسال التأكيد</button>
+      </form>
+      <div class="rsvp-note" data-ar="سيتم إرسال ردكم مباشرة عبر واتساب" data-en="Your response will be sent directly via WhatsApp">
+        سيتم إرسال ردكم مباشرة عبر واتساب
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section>
+  <div class="section-inner">
+    <div class="section-eyebrow" data-ar="كيف بدأنا" data-en="How it began">كيف بدأنا</div>
+    <div class="section-title" data-ar="قصتنا" data-en="Our Story">قصتنا</div>
+    <div class="rule"></div>
+    <div class="timeline-item">
+      <div class="ti-text">
+        <div class="ti-title" data-ar="اللقاء الأول" data-en="The First Meeting">اللقاء الأول</div>
+        <div class="ti-desc" data-ar="التقينا في حفل مشترك، وكانت البداية حديثاً عابراً تحول إلى صداقة جميلة." data-en="We met at a mutual friend's gathering — a passing conversation that grew into a beautiful friendship.">التقينا في حفل مشترك، وكانت البداية حديثاً عابراً تحول إلى صداقة جميلة.</div>
+      </div>
+      <div class="ti-num">01</div>
+    </div>
+    <div class="timeline-item">
+      <div class="ti-text">
+        <div class="ti-title" data-ar="الخطوبة" data-en="The Engagement">الخطوبة</div>
+        <div class="ti-desc" data-ar="بعد عامين، تقدم أحمد لخطبة نور وسط فرحة العائلتين." data-en="Two years later, Ahmed proposed, surrounded by the joy of both families.">بعد عامين، تقدم أحمد لخطبة نور وسط فرحة العائلتين.</div>
+      </div>
+      <div class="ti-num">02</div>
+    </div>
+  </div>
+</section>
+
+<!-- DETAILS -->
+<section>
+  <div class="section-inner">
+    <div class="section-eyebrow" data-ar="التفاصيل" data-en="Details">التفاصيل</div>
+    <div class="section-title" data-ar="كل ما يهمكم" data-en="Everything you need to know">كل ما يهمكم</div>
+    <div class="rule"></div>
+    <div class="details-card">
+      <div class="detail-block">
+        <div class="dl-label" data-ar="القاعة" data-en="Venue">القاعة</div>
+        <div class="dl-value">قاعة الفيروزية</div>
+      </div>
+      <div class="detail-block">
+        <div class="dl-label" data-ar="العنوان" data-en="Address">العنوان</div>
+        <div class="dl-value">طريق الملك فهد، الرياض</div>
+      </div>
+      <div class="detail-block">
+        <div class="dl-label" data-ar="التاريخ والوقت" data-en="Date & Time">التاريخ والوقت</div>
+        <div class="dl-value" data-ar="الجمعة 15 يناير 2027 - 7:30 م" data-en="Friday, Jan 15 2027 - 7:30 PM">الجمعة 15 يناير 2027 - 7:30 م</div>
+      </div>
+    </div>
+    <button class="cal-btn" id="addCalBtn" data-ar="أضيفوها إلى تقويمكم" data-en="Add to calendar">
+      📅 أضيفوها إلى تقويمكم
+    </button>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section>
+  <div class="section-inner">
+    <div class="section-eyebrow" data-ar="الموقع" data-en="Location">الموقع</div>
+    <div class="section-title" data-ar="كيف تصلون إلينا" data-en="How to reach us">كيف تصلون إلينا</div>
+    <div class="rule"></div>
+    <div class="location-row">
+      <div class="loc-left">📍 <span data-ar="الوصول للقاعة" data-en="Directions to the venue">الوصول للقاعة</span></div>
+      <a class="dir-btn" href="https://maps.google.com/?q=طريق+الملك+فهد+الرياض" target="_blank" data-ar="الاتجاهات ←" data-en="Directions →">الاتجاهات ←</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section>
+  <div class="section-inner">
+    <div class="section-eyebrow" data-ar="البرنامج" data-en="Program">البرنامج</div>
+    <div class="section-title" data-ar="برنامج الحفل" data-en="Event Program">برنامج الحفل</div>
+    <div class="rule"></div>
+    <div class="program-row"><span data-ar="استقبال الضيوف" data-en="Guest arrival">استقبال الضيوف</span><span class="program-time">7:30 PM</span></div>
+    <div class="program-row"><span data-ar="الزفة" data-en="Grand entrance">الزفة</span><span class="program-time">8:30 PM</span></div>
+    <div class="program-row"><span data-ar="العشاء" data-en="Dinner">العشاء</span><span class="program-time">10:30 PM</span></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="section-inner">
+    <div class="section-eyebrow" data-ar="نصائح مفيدة" data-en="Good to know">نصائح مفيدة</div>
+    <div class="section-title" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</div>
+    <div class="rule"></div>
+    <div id="faqList">
+      <div class="faq-item">
+        <button class="faq-q"><span data-ar="هل يتوفر موقف سيارات؟" data-en="Is parking available?">هل يتوفر موقف سيارات؟</span><span class="chev">⌄</span></button>
+        <div class="faq-a"><p data-ar="نعم، تتوفر مواقف مخصصة للضيوف أمام القاعة مباشرة." data-en="Yes, dedicated guest parking is available right in front of the venue.">نعم، تتوفر مواقف مخصصة للضيوف أمام القاعة مباشرة.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span data-ar="هل يمكن اصطحاب الأطفال؟" data-en="Can we bring children?">هل يمكن اصطحاب الأطفال؟</span><span class="chev">⌄</span></button>
+        <div class="faq-a"><p data-ar="بكل سرور، الحفل يرحب بالأطفال من جميع الأعمار." data-en="Of course — children of all ages are welcome.">بكل سرور، الحفل يرحب بالأطفال من جميع الأعمار.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-line" data-ar="نتشرف بحضوركم" data-en="We're honored by your presence">نتشرف بحضوركم</div>
+  <div class="f-sub" data-ar="15 يناير 2027 — حفل زفاف أحمد ونور" data-en="Jan 15, 2027 — Ahmed & Nour's Wedding">15 يناير 2027 — حفل زفاف أحمد ونور</div>
+</footer>
+
+<script>
+/* ============ EDIT THESE TO CUSTOMIZE ============ */
+const EVENT_DATE = "2027-01-15T19:30:00"; // ISO date/time used for countdown + calendar
+const EVENT_TITLE = "حفل زفاف أحمد ونور";
+const EVENT_LOCATION = "قاعة الفيروزية، طريق الملك فهد، الرياض";
+const HOST_WHATSAPP = "201000000000"; // digits only, country code, no +
+/* =================================================== */
+
+// ---- Language toggle ----
+const toggleBtns = document.querySelectorAll('#langToggle button');
+toggleBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.lang;
+    toggleBtns.forEach(b => b.classList.toggle('active', b === btn));
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.querySelectorAll('[data-ar]').forEach(el => {
+      const text = lang === 'ar' ? el.dataset.ar : el.dataset.en;
+      if (text !== undefined) el.textContent = text;
+    });
+    document.querySelectorAll('[data-ph-ar]').forEach(el => {
+      const ph = lang === 'ar' ? el.dataset.phAr : el.dataset.phEn;
+      if (ph !== undefined) el.setAttribute('placeholder', ph);
+    });
+  });
+});
+
+// ---- Countdown ----
+function updateCountdown(){
+  const target = new Date(EVENT_DATE).getTime();
+  const now = Date.now();
+  const diff = Math.max(0, target - now);
+  const d = Math.floor(diff / (1000*60*60*24));
+  const h = Math.floor((diff / (1000*60*60)) % 24);
+  const m = Math.floor((diff / (1000*60)) % 60);
+  const s = Math.floor((diff / 1000) % 60);
+  document.getElementById('cd-days').textContent = d;
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ---- Attendance toggle ----
+document.querySelectorAll('.toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  });
+});
+
+// ---- RSVP submit -> WhatsApp ----
+document.getElementById('rsvpForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('rsvp-name').value.trim();
+  const code = document.getElementById('rsvp-code').value;
+  const phone = document.getElementById('rsvp-phone').value.trim();
+  const attending = document.querySelector('.toggle-btn.selected').dataset.val === 'yes' ? 'سأحضر' : 'أعتذر';
+  const guests = document.getElementById('rsvp-guests').value;
+  const msg = document.getElementById('rsvp-msg').value.trim();
+
+  const text = `تأكيد حضور - ${EVENT_TITLE}\nالاسم: ${name}\nالجوال: ${code}${phone}\nالحضور: ${attending}\nعدد الأشخاص: ${guests}\nرسالة: ${msg || '-'}`;
+  const url = `https://wa.me/${HOST_WHATSAPP}?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+});
+
+// ---- Add to calendar (.ics) ----
+document.getElementById('addCalBtn').addEventListener('click', function(){
+  const start = new Date(EVENT_DATE);
+  const end = new Date(start.getTime() + 3*60*60*1000); // +3 hours default
+  const fmt = d => d.toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
+  const ics = [
+    'BEGIN:VCALENDAR','VERSION:2.0','BEGIN:VEVENT',
+    `DTSTART:${fmt(start)}`,`DTEND:${fmt(end)}`,
+    `SUMMARY:${EVENT_TITLE}`,`LOCATION:${EVENT_LOCATION}`,
+    'END:VEVENT','END:VCALENDAR'
+  ].join('\r\n');
+  const blob = new Blob([ics], {type:'text/calendar'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'invitation.ics';
+  link.click();
+});
+
+// ---- FAQ accordion ----
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const answer = item.querySelector('.faq-a');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-a').style.maxHeight = null;
+    });
+    if (!isOpen){
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+</script>
+</body>
+</html>
